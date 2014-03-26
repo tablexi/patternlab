@@ -1,0 +1,3 @@
+[submodule "patternlab-php"]
+	path = patternlab-php
+	url = git@github.com:pattern-lab/patternlab-php.git
