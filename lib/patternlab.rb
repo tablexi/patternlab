@@ -1,5 +1,5 @@
 require "patternlab/version"
 
 module Patternlab
-  # Your code goes here...
+  require 'patternlab/railtie' if defined?(Rails)
 end
