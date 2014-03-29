@@ -1,3 +1,5 @@
+require 'haml_renderer'
+
 namespace :patternlab do
   task :init do
     if File.exist? "#{Rails.root}/pattern-lab"
@@ -11,6 +13,9 @@ namespace :patternlab do
     puts "Pattern Lab source files have been copied into /pattern-lab"
   end
 
+  task :render_haml do
+    HamlRenderer.render_all("#{Rails.root}/tmp/patternlab-php/source")
+  end
 
   # TODO make an upgrade task that pulls from git and copy just the core/ directory
   task :generate do
@@ -21,6 +26,7 @@ namespace :patternlab do
     Rake::Task["patternlab:copy_to_tmp"].invoke
     Rake::Task["patternlab:copy_source_to_tmp"].invoke
     puts "Building..."
+    Rake::Task["patternlab:render_haml"].invoke
     Rake::Task["patternlab:build"].invoke
     puts "Build complete. Copying to /public/pattern-lab"
     Rake::Task["patternlab:copy_to_public"].invoke
