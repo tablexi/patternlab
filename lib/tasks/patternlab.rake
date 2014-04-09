@@ -47,7 +47,7 @@ namespace :patternlab do
   end
 
   task :copy_to_tmp do
-    %x(rsync -rv --exclude=.git #{File.dirname(__FILE__)}/../../patternlab-php/ #{Rails.root}/tmp/patternlab-php)
+    %x(rsync -rv --exclude=.git "#{File.dirname(__FILE__)}/../../patternlab-php/" "#{Rails.root}/tmp/patternlab-php")
   end
 
   task :copy_to_public do
