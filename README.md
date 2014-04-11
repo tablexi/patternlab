@@ -1,12 +1,17 @@
 # Patternlab
 
-TODO: Write a gem description
+This is a Ruby-based wrapper around [patternlab.io](http://patternlab.io/). It
+is meant to make it easier to include the Pattern Lab within your Rails
+projects.
+
+Because Pattern Lab is PHP based, you are required to have PHP 5.3+ installed
+on your system.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'patternlab'
+    gem 'patternlab', :github => 'jhanggi/patternlab', :submodules => true
 
 And then execute:
 
@@ -18,7 +23,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialize
+
+    $ rake patternlab:init
+
+This will create a directory of source files in `/pattern-lab`. These are the
+files you will edit to customize your design library. These files should
+be committed to version control.
+
+    $ rake patternlab:generate
+
+This generates the static site and places it into the public folder. The library
+will be available at `/pattern-lab`. It is up to you if you want to commit these
+files to source control or add them to .gitignore. If you want the library to
+be available on your staging/production server, then you should commit them.
 
 ## Contributing
 
