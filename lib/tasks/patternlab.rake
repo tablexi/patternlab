@@ -47,7 +47,16 @@ namespace :patternlab do
   end
 
   task :copy_to_tmp do
-    %x(rsync -rv --exclude=.git "#{File.dirname(__FILE__)}/../../patternlab-php/" "#{Rails.root}/tmp/patternlab-php")
+    php_directory = "#{File.dirname(__FILE__)}/../../patternlab-php/"
+    if Dir["#{php_directory}*"].empty?
+      raise "There was a problem copying the pattern lab files from the gem. If
+you are using Bundler's github path, make sure to include
+:submodules => true in the gem declaration
+
+gem 'patternlab', github: 'jhanggi/patternlab', submodules: true
+"
+    end
+    %x(rsync -rv --exclude=.git "#{php_directory}" "#{Rails.root}/tmp/patternlab-php")
   end
 
   task :copy_to_public do
