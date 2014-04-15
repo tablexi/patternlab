@@ -7,6 +7,9 @@ projects.
 Because Pattern Lab is PHP based, you are required to have PHP 5.3+ installed
 on your system.
 
+You are also able to use HAML for your patterns. All `.haml` files will be
+rendered to Mustache files before the static site generation.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -30,6 +33,8 @@ Or install it yourself as:
 This will create a directory of source files in `/pattern-lab`. These are the
 files you will edit to customize your design library. These files should
 be committed to version control.
+
+### Generate
 
     $ rake patternlab:generate
 
