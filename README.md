@@ -14,7 +14,7 @@ rendered to Mustache files before the static site generation.
 
 Add this line to your application's Gemfile:
 
-    gem 'patternlab', :github => 'jhanggi/patternlab', :submodules => true
+    gem 'patternlab', :github => 'tablexi/patternlab', :submodules => true
 
 And then execute:
 
@@ -39,9 +39,10 @@ be committed to version control.
     $ rake patternlab:generate
 
 This generates the static site and places it into the public folder. The library
-will be available at `/pattern-lab`. It is up to you if you want to commit these
-files to source control or add them to .gitignore. If you want the library to
-be available on your staging/production server, then you should commit them.
+will be available at `/pattern-lab/` (currently, the trailing slash is
+necessary. It is up to you if you want to commit these files to source control
+or add them to .gitignore. If you want the library to be available on your
+staging/production server, then you should commit them.
 
 ## Contributing
 
