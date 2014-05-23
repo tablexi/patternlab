@@ -1,6 +1,7 @@
 require 'haml_renderer'
 
 namespace :patternlab do
+  desc "Initialize patternlab (create a directory of source files in `/pattern-lab`)"
   task :init do
     if File.exist? "#{Rails.root}/pattern-lab"
       puts "Already initialized."
@@ -13,11 +14,8 @@ namespace :patternlab do
     puts "Pattern Lab source files have been copied into /pattern-lab"
   end
 
-  task :render_haml do
-    HamlRenderer.render_all("#{Rails.root}/tmp/patternlab-php/source")
-  end
-
   # TODO make an upgrade task that pulls from git and copy just the core/ directory
+  desc 'Generate the pattern lab (to `/public/pattern-lab/`)'
   task :generate do
     unless File.exist? "#{Rails.root}/pattern-lab"
       puts "Run patternlab:init first"
@@ -34,6 +32,10 @@ namespace :patternlab do
   end
 
   # Everything below here should not be called manually
+
+  task :render_haml do
+    HamlRenderer.render_all("#{Rails.root}/tmp/patternlab-php/source")
+  end
 
   task :build do
     Dir.chdir("#{Rails.root}/tmp/patternlab-php") do
