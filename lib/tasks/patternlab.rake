@@ -1,4 +1,5 @@
-require 'haml_renderer'
+require 'patternlab/renderer/haml'
+require 'patternlab/renderer/erb'
 
 namespace :patternlab do
   desc "Initialize patternlab (create a directory of source files in `/pattern-lab`)"
@@ -24,6 +25,7 @@ namespace :patternlab do
     Rake::Task["patternlab:copy_to_tmp"].invoke
     Rake::Task["patternlab:copy_source_to_tmp"].invoke
     puts "Building..."
+    Rake::Task["patternlab:render_erb"].invoke
     Rake::Task["patternlab:render_haml"].invoke
     Rake::Task["patternlab:build"].invoke
     puts "Build complete. Copying to /public/pattern-lab"
@@ -33,8 +35,12 @@ namespace :patternlab do
 
   # Everything below here should not be called manually
 
-  task :render_haml do
-    HamlRenderer.render_all("#{Rails.root}/tmp/patternlab-php/source")
+  task :render_haml => :environment do
+    Patternlab::Renderer::Haml.render_all("#{Rails.root}/tmp/patternlab-php/source")
+  end
+
+  task :render_erb => :environment do
+    Patternlab::Renderer::Erb.render_all("#{Rails.root}/tmp/patternlab-php/source")
   end
 
   task :build do
