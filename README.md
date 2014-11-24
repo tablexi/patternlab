@@ -44,6 +44,25 @@ necessary. It is up to you if you want to commit these files to source control
 or add them to .gitignore. If you want the library to be available on your
 staging/production server, then you should commit them.
 
+### Deploy
+
+Add the following to your Capistrano 3 deployment files (`deploy.rb`, `stage.rb`,
+or `prod.rb` depending on where you what patternlab to be available):
+
+    require 'patternlab'
+    after 'deploy:publishing', 'patternlab:publish'
+
+This will run `rake patternlab:generate` on the server as part of the deployment
+process. For this to work, you must have PHP installed on the server.
+
+If you don't have PHP on the server, you can instead add
+
+    require 'patternlab'
+    after 'deploy:publishing', 'patternlab:publish_local'
+
+This will run the generation locally and use `rsync` to copy the files to the
+server. *This feature is experimental at this time.*
+
 ## Contributing
 
 1. Fork it
